@@ -1,7 +1,9 @@
 package com.devsuperior.dscatalog.lib.dto;
 
 import com.devsuperior.dscatalog.lib.entities.Category;
+import lombok.Getter;
 
+@Getter
 public class CategoryDTO {
 
     private Long id;
@@ -20,11 +22,4 @@ public class CategoryDTO {
         name = entity.getName();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
 }
