@@ -9,7 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +21,8 @@ public class CategoryService {
     private final CategoryRepository repository;
 
     @Transactional(readOnly = true)
-    public Page<CategoryDTO> findAll(PageRequest pageRequest){
-        Page<Category> result = repository.findAll(pageRequest);
+    public Page<CategoryDTO> findAll(Pageable pageable){
+        Page<Category> result = repository.findAll(pageable);
         return result.map(CategoryDTO::new);
     }
 
