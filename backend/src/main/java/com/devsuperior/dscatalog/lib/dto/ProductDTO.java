@@ -67,4 +67,8 @@ public class ProductDTO {
     public List<CategoryDTO> getCategories() {
         return categories;
     }
+
+    public Instant getMoment() {
+        return moment;
+    }
 }
