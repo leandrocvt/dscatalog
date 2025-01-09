@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +27,15 @@ public class CategoryService {
         Category category = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Entity not found!"));
         return new CategoryDTO(category);
+    }
+
+
+    @Transactional
+    public CategoryDTO save(CategoryDTO dto) {
+        Category entity = new Category();
+        entity.setName(dto.getName());
+        entity = repository.save(entity);
+        return new CategoryDTO(entity);
     }
 
 }
