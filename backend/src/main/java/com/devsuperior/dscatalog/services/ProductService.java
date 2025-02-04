@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -32,8 +34,8 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id){
-        Product entity = repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Entity not found!"));
+        Optional<Product> product = repository.findById(id);
+        Product entity = product.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
         return new ProductDTO(entity, entity.getCategories());
     }
 

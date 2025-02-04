@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -28,9 +30,9 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id){
-        Category category = repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Entity not found!"));
-        return new CategoryDTO(category);
+        Optional<Category> category = repository.findById(id);
+        Category entity = category.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
+        return new CategoryDTO(entity);
     }
 
 
