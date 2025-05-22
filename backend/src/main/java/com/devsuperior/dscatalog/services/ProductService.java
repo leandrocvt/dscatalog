@@ -35,7 +35,7 @@ public class ProductService {
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id){
         Optional<Product> product = repository.findById(id);
-        Product entity = product.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
+        Product entity = product.orElseThrow(() -> new ResourceNotFoundException("Entity not found!"));
         return new ProductDTO(entity, entity.getCategories());
     }
 
