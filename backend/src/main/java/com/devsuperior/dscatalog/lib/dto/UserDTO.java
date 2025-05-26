@@ -1,6 +1,8 @@
 package com.devsuperior.dscatalog.lib.dto;
 
 import com.devsuperior.dscatalog.lib.entities.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +10,11 @@ import java.util.Set;
 public class UserDTO {
 
     private Long id;
+    @NotBlank(message = "Campo obrigatório!")
     private String firstName;
     private String lastName;
+
+    @Email(message = "Informe um email valido!")
     private String email;
     private Set<RoleDTO> roles = new HashSet<>();
 
