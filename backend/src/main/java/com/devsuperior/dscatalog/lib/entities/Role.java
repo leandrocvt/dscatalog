@@ -21,6 +21,22 @@ public class Role {
         this.authority = authority;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -33,5 +49,4 @@ public class Role {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 }
