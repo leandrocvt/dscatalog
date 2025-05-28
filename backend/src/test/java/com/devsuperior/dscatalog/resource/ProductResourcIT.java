@@ -1,5 +1,6 @@
-package com.devsuperior.dscatalog.resouce;
+package com.devsuperior.dscatalog.resource;
 
+import com.devsuperior.dscatalog.TokenUtil;
 import com.devsuperior.dscatalog.factory.ProductFactory;
 import com.devsuperior.dscatalog.lib.dto.ProductDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,15 +29,24 @@ public class ProductResourcIT {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private TokenUtil tokenUtil;
+
     private Long existingId;
     private Long nonExistingId;
     private Long countTotalProducts;
+    private String username, password, bearerToken;
 
     @BeforeEach
     void setUp() throws Exception {
         existingId = 1L;
         nonExistingId = 1000L;
         countTotalProducts = 25L;
+
+        username = "maria@gmail.com";
+        password = "123456";
+
+        bearerToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
     }
 
     @Test
@@ -63,6 +73,7 @@ public class ProductResourcIT {
         String expectedDescription = productDTO.getDescription();
 
         ResultActions result = mockMvc.perform(put("/products/{id}", existingId)
+                .header("Authorization", "Bearer " + bearerToken)
                 .content(jsonBody)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
@@ -81,6 +92,7 @@ public class ProductResourcIT {
         String jsonBody = objectMapper.writeValueAsString(productDTO);
 
         ResultActions result = mockMvc.perform(put("/products/{id}", nonExistingId)
+                .header("Authorization", "Bearer " + bearerToken)
                 .content(jsonBody)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));

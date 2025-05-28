@@ -1,8 +1,5 @@
 package com.devsuperior.dscatalog.services.validation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.devsuperior.dscatalog.lib.dto.UserInsertDTO;
 import com.devsuperior.dscatalog.lib.entities.User;
 import com.devsuperior.dscatalog.repositories.UserRepository;
@@ -10,6 +7,9 @@ import com.devsuperior.dscatalog.resources.exceptions.FieldMessage;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserInsertDTO> {

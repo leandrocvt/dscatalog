@@ -1,6 +1,5 @@
 package com.devsuperior.dscatalog.services.validation;
 
-import com.devsuperior.dscatalog.lib.dto.UserInsertDTO;
 import com.devsuperior.dscatalog.lib.dto.UserUpdateDTO;
 import com.devsuperior.dscatalog.lib.entities.User;
 import com.devsuperior.dscatalog.repositories.UserRepository;
