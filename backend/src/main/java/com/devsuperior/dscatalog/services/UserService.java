@@ -34,6 +34,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository repository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthService authService;
     private Page<User> result;
 
     @Transactional(readOnly = true)
@@ -49,6 +50,11 @@ public class UserService implements UserDetailsService {
         return new UserDTO(entity);
     }
 
+    @Transactional(readOnly = true)
+    public UserDTO findProfile(){
+        User entity = authService.authenticated();
+        return new UserDTO(entity);
+    }
 
     @Transactional
     public UserDTO save(UserInsertDTO dto) {
